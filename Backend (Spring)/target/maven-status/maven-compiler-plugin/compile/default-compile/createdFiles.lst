@@ -1,0 +1,16 @@
+com\esprit\examen\entities\CategorieProduit.class
+com\esprit\examen\services\IStockService.class
+com\esprit\examen\repositories\DetailFactureRepository.class
+com\esprit\examen\entities\Facture.class
+com\esprit\examen\entities\Fournisseur.class
+com\esprit\examen\services\StockServiceImpl.class
+com\esprit\examen\controllers\StockRestController.class
+com\esprit\examen\entities\Stock.class
+com\esprit\examen\repositories\FournisseurRepository.class
+com\esprit\examen\repositories\FactureRepository.class
+com\esprit\examen\SpringFoxSwaggerConfig.class
+com\esprit\examen\entities\DetailFacture.class
+com\esprit\examen\entities\Produit.class
+com\esprit\examen\repositories\ProduitRepository.class
+com\esprit\examen\TpStockProjectApplication.class
+com\esprit\examen\repositories\StockRepository.class
