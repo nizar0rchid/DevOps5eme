@@ -28,7 +28,7 @@ public class ProduitServiceImpTest {
     public void addProduitWithSuccess() throws ParseException{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         Date dateCreation = dateFormat.parse("30/08/2021");
-        Date dateDerniereModification =dateFormat.parse("30/09/2021");
+        Date dateDerniereModification =dateFormat.parse("30/09/2022");
         Produit produit = new Produit();
         produit.setPrix(11);
         produit.setDateCreation(dateCreation);
