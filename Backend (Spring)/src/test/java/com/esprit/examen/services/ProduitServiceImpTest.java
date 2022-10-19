@@ -33,7 +33,7 @@ public class ProduitServiceImpTest {
         produit.setPrix(11);
         produit.setDateCreation(dateCreation);
         produit.setDateDerniereModification(dateDerniereModification);
-        produit.setLibelleProduit("libelleProduitrr");
+        produit.setLibelleProduit("libelleProduitrr8");
         produit.setCodeProduit("code221");
         Produit p = service.addProduit(produit);
         System.out.print("Produit"+p);
