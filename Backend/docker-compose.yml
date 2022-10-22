@@ -26,7 +26,7 @@ services:
     networks:
       - devops
     depends_on:
-      - mysql-db
+      - mysql
     environment:
       - MYSQL_HOST=mysql-db
       - MYSQL_USERNAME=nizar
