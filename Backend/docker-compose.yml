@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  mysql:
+    container_name: mysql-db
+    image: mysql:8.0
+    networks:
+      - devops
+    environment:
+      - MYSQL_USER=nizar
+      - MYSQL_PASSWORD=123
+      - MYSQL_DATABASE=tpachato
+      - MYSQL_ROOT_PASSWORD=
+    volumes:
+      - dbvol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+  spring:
+    build:
+      context: .
+    container_name: backend-spring
+    ports:
+      - "8089:8089"
+    networks:
+      - devops
+    depends_on:
+      - mysql-db
+    environment:
+      - MYSQL_HOST=mysql-db
+      - MYSQL_USERNAME=nizar
+      - MYSQL_PASSWORD=123
+      - MYSQL_DATABASE=tpachato
+      - MYSQL_PORT=3306
+
+networks:
+  devops:
+    name: v-network
+
+volumes:
+  dbvol:
+
+
