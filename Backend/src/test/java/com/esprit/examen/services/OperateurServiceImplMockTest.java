@@ -46,7 +46,7 @@ import java.util.stream.Stream;
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 
-public class OperateurServiceImplMock {
+public class OperateurServiceImplMockTest {
     @Autowired
     OperateurServiceImpl operateurServiceImpl;
     @MockBean
