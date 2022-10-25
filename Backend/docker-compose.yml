@@ -18,9 +18,8 @@ services:
 
   spring:
     build:
-      context: "./"
-      dockerfile: "Dockerfile"
-    restart: on-failure
+      context: .
+    container_name: backend-spring
     ports:
       - "8089:8089"
     networks:
