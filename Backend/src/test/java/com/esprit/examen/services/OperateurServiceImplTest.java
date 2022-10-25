@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,13 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @Slf4j
 
-
+@TestMethodOrder(OrderAnnotation.class)
 public class OperateurServiceImplTest {
 	@Autowired
 	IOperateurService operateurService;
 
 	
 	@Test
+	@Order(1)
 	public void testAddOperateur() throws ParseException {
 
 	
@@ -45,7 +49,7 @@ public class OperateurServiceImplTest {
 		assertTrue(operateur.getNom().length() > 0);
 		assertTrue(operateur.getPrenom().length() > 0);
 		assertTrue(operateur.getPassword().length() > 0);
-		operateurService.deleteOperateur(operateur.getIdOperateur());
+		log.info("Operateur ajouter avec success");
 
 	}
 }
