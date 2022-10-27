@@ -1,6 +1,5 @@
 package com.esprit.examen.services;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ import static org.mockito.Mockito.when;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
@@ -59,4 +57,27 @@ public class OperateurServiceImplMockTest {
         Mockito.when(operateurRepository.save(cat)).thenReturn(cat);
         assertEquals(cat, operateurServiceImpl.addOperateur(cat));
     }
+
+    @Test
+    @Order(2)
+    public void getOperateursTest() {
+        Mockito.when(operateurRepository.findAll()).thenReturn(Stream
+                .of(new Operateur("Nizar", "Ferchichi", "devops123"), new Operateur("Yassine", "Derbel", "devops123"))
+                .collect(Collectors.toList()));
+        assertEquals(2, operateurServiceImpl.retrieveAllOperateurs().size());
+        List<Operateur> listOperateurs = operateurServiceImpl.retrieveAllOperateurs();
+        log.info("==>size:" + listOperateurs.size());
+        for (int i = 0; i < listOperateurs.size(); i++) {
+            log.info("==>" + listOperateurs.get(i).getNom());
+        }
+    }
+
+    @Test
+    @Order(3)
+    public void deleteOperateurTest() {
+        Operateur cat = new Operateur("Nizar", "Ferchichi", "devops123");
+        operateurServiceImpl.deleteOperateur(cat.getIdOperateur());
+        log.info("Operateur supprimé avec success");
+    }
+
 }
