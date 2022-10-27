@@ -1,26 +1,18 @@
-pipeline {
+pipeline{
     agent any
-    tools {
-        maven 'M2_HOME'
 
-    }
+    stages{
 
-    stages {
-        stage('Checkout GIT') {
-            steps {
-                echo 'Pulling...';
-                git branch: 'Nizar',
-                url: 'https://github.com/nizar0rchid/DevOps5eme.git'
-                
 
+        stage('Cloning from GitHub') {
+                steps {
+                    git branch: 'yassine', url: 'https://github.com/nizar0rchid/DevOps5eme.git'
+                }
                 
             }
-          
-        }
-        
-        stage('prepare project') {
+    stage('prepare project') {
         steps {
-            // The -a option is an improved recursive option, that preserve all file attributes, and also preserve symlinks.
+        // The -a option is an improved recursive option, that preserve all file attributes, and also preserve symlinks.
         // The . at end of the source path is a specific cp syntax that allow to copy all files and folders, included hidden ones.
         sh "cp -a ./Backend/. ."
         sh "rm -rf ./Backend"
@@ -28,46 +20,49 @@ pipeline {
         sh "ls -la"
         }
     }
-    
-        stage("Build & Tests") {
+
+      stage('Clean Maven'){
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+                sh 'mvn clean '
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-                    
-        }
-        
-       stage('Docker') {
             
+        }
+        stage('Compile Project'){
             steps {
-                
-                sh 'docker-compose up --detach'
+                sh 'mvn compile  -DskipTests'
+            }
+            
+        }
+        
+        
+        /* stage('UNIT test'){
+            steps{
+                sh 'mvn test'
+            }
+        }*/
+
+         stage('SonarQube Analysis'){
+                steps {
+                    sh """mvn sonar:sonar -DskipTests \
+                            -Dsonar.language=java \
+                          
+                            
+                    """
+                }
                 
             }
-        }
         
-        stage('Nexus') {
-          steps {
-            sh 'mvn deploy -Dmaven.test.skip=true -e'
-          }
-        }
         
-        stage('mv clean & compile') {
-          steps {
-            sh 'mvn clean'
-            sh 'mvn compile'
-          }
-        }
         
-        stage('Sonarqube') {
-          steps {
-            sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-          }
-        }
         
+   /*     stage('Nexus'){
+            steps{
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+     */
+        
+      
+
     }
 }
