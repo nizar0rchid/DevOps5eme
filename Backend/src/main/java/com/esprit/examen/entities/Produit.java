@@ -27,7 +27,18 @@ public class Produit implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
+	public Produit(String codeProduit2, String libelleProduit2, int prix2, Date dateCreation2,
+            Date dateDerniereModification2) {
+	    this.codeProduit =codeProduit2;
+	    this.libelleProduit=libelleProduit2;
+	    this.dateCreation=dateCreation2;
+	    this.prix=prix2;
+	    this.dateDerniereModification=dateDerniereModification2;
+        // TODO Auto-generated constructor stub
+    }
+
+    private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProduit;
