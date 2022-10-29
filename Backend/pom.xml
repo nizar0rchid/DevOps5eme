@@ -125,6 +125,15 @@
 		
 	</build>
 	
+	<distributionManagement>
+		<repository>
+			<id>DevOps_Achat</id>
+			<name>Internal Releases</name>
+			<url>http://192.168.1.16:8081/repository/DevOps_Achat/</url>
+		</repository>
+	 
+	
+	</distributionManagement>
 	
 	
 
