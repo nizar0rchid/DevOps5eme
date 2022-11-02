@@ -1,3 +1,5 @@
 com\esprit\examen\services\OperateurServiceImplMockTest.class
 com\esprit\examen\services\ProduitServiceImpTest.class
 com\esprit\examen\services\OperateurServiceImplTest.class
+com\esprit\examen\services\CategorieServiceImplMock.class
+com\esprit\examen\services\CategorieServiceImplTest.class
