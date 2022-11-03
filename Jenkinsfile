@@ -3,14 +3,14 @@ pipeline{
 
     stages{
 
-
         stage('Cloning from GitHub') {
                 steps {
                     git branch: 'yassine', url: 'https://github.com/nizar0rchid/DevOps5eme.git'
                 }
                 
             }
-    stage('prepare project') {
+
+        stage('prepare project') {
         steps {
         // The -a option is an improved recursive option, that preserve all file attributes, and also preserve symlinks.
         // The . at end of the source path is a specific cp syntax that allow to copy all files and folders, included hidden ones.
@@ -19,7 +19,7 @@ pipeline{
         // List the final content
         sh "ls -la"
         }
-    }
+        }
 
       stage('Clean Maven'){
             steps {
@@ -34,34 +34,34 @@ pipeline{
             
         }
         
-        
-        /* stage('UNIT test'){
+         stage('UNIT test'){
             steps{
                 sh 'mvn test'
             }
-        }*/
+        }
 
-         stage('SonarQube Analysis'){
-                steps {
-                    sh """mvn sonar:sonar -DskipTests \
-                            -Dsonar.language=java \
-                          
-                            
-                    """
-                }
-                
-            }
-        
-        
-        
+        stage('Sonarqube Analysis') {
+          steps {
+            sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+          }
+        }
         
         stage('Nexus') {
           steps {
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
-     
-        
+        }
+        stage('Docker') {
+            
+            steps {
+                
+                sh 'docker-compose up --detach'
+                
+            }
+        }
+
       
 
-    }
+
+}
 }
