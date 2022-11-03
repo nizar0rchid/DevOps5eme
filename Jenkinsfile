@@ -57,6 +57,13 @@ pipeline{
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
         }
+              stage('Clean Maven'){
+            steps {
+                sh 'mvn package'
+            }
+            
+        }
+
         stage('Docker') {
             
             steps {
