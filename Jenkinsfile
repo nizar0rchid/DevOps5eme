@@ -34,10 +34,16 @@ pipeline{
             
         }
         
-         stage('UNIT test'){
-            steps{
-                sh 'mvn test'
+        stage("Build & Tests") {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
             }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
+                    
         }
 
         stage('Sonarqube Analysis') {
