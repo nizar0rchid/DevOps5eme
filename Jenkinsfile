@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout GIT') {
             steps {
                 echo 'Pulling...';
-                git branch: 'Nizar',
+                git branch: 'sami',
                 url: 'https://github.com/nizar0rchid/DevOps5eme.git'
                 
 
