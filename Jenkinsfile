@@ -46,19 +46,19 @@ pipeline {
             sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
           }
         }
-
+ stage('mv clean & compile') {
+          steps {
+            sh 'mvn clean'
+            sh 'mvn compile'
+          }
+        }
         stage('Nexus') {
           steps {
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
         }
         
-        stage('mv clean & compile') {
-          steps {
-            sh 'mvn clean'
-            sh 'mvn compile'
-          }
-        }
+       
         
        
         
