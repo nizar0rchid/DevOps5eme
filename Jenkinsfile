@@ -29,27 +29,24 @@ pipeline {
         }
     }
     
-        stage("Build & Tests") {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
-            }
-            post {
-                success {
+        //stage("Build & Tests") {
+          //  steps {
+            //    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+            //}
+            //post {
+              //  success {
                     junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
+                //}
+            //}
                     
-        }
+       // }
         
-       stage('Docker') {
-            
-            steps {
-                
-                sh 'docker-compose up --detach'
-                
-            }
+      stage('Sonarqube') {
+          steps {
+            sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+          }
         }
-        
+
         stage('Nexus') {
           steps {
             sh 'mvn deploy -Dmaven.test.skip=true -e'
@@ -63,11 +60,7 @@ pipeline {
           }
         }
         
-        stage('Sonarqube') {
-          steps {
-            sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-          }
-        }
+       
         
     }
 }
