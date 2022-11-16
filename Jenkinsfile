@@ -57,11 +57,12 @@ pipeline {
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
         }
+        
         stage('Docker') {
             
             steps {
                 
-                sh 'docker-compose up --detach'
+                sh 'docker-compose up -d'
                 
             }
         }
