@@ -57,6 +57,25 @@ pipeline {
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
         }
+        stage('Docker') {
+            
+            steps {
+                
+                sh 'docker-compose up --detach'
+                
+            }
+        }
+           stage("Login to DockerHub") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u samitfifha -p 181JMT2612'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{
+                    sh 'docker push projetdevops_app_1'
+                }
+        }
         
        
         
