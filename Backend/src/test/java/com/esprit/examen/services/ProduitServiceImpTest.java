@@ -30,24 +30,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.esprit.examen.entities.Produit;
 
 import lombok.extern.slf4j.Slf4j;
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
+//@RunWith(MockitoJUnitRunner.class)
 @Slf4j
 
 public class ProduitServiceImpTest {
-    @Mock
+    @Autowired
     private IProduitService service;
-    @Mock
-    private ProduitServiceImpl repo;   
+    @Autowired
+    //private ProduitServiceImpl repo;   
+    /*
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
 
     @BeforeEach void setUp()
     {
-        this.service
-            = new ProduitServiceImpl();
+        this.service= new ProduitServiceImpl();
     }
 
     @Test   
@@ -65,25 +65,25 @@ public class ProduitServiceImpTest {
         System.out.print("Produit//////////////////////////////////////////////////////////////////////////////////////////////////////////"+produitt.getCodeProduit());
 
         service.addProduit(produitt);
-        /*produit.setPrix(11);
+        produit.setPrix(11);
         produit.setDateCreation(dateCreation);
         produit.setDateDerniereModification(dateDerniereModification);
         //produit.setLibelleProduit("libelleProduit");
         //produit.setCodeProduit("code221ayassine");
-        Produit p = service.addProduit(produit);
+        Produit p = service.addProduit(produitt);
         System.out.print("Produit"+p);
-        assertNotNull(produit.getCodeProduit());
-        assertNotNull(produit.getPrix());
-        assertTrue(produit.getLibelleProduit().length() > 0 );*/
-        verify(service,times(1)).addProduit(produitt);
+        assertNotNull(p.getCodeProduit());
+        assertNotNull(p.getPrix());
+        assertTrue(p.getLibelleProduit().length() > 0 );
+        //verify(service,times(1)).addProduit(produitt);
     }
 
     
     
-    /*
+    
     @Autowired
     private IProduitService service;
-    
+    */
     @Test
     public void addProduitTest() throws ParseException{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
@@ -146,8 +146,10 @@ public class ProduitServiceImpTest {
         
     }
 
-    */
+    
 }
+
+
 
 
 
