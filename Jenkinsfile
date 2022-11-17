@@ -72,7 +72,7 @@ pipeline {
         stage("Login to DockerHub") {
                 steps{
                    // sh 'sudo chmod 666 /var/run/docker.sock'
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker -u nizar --bellehilatpiratiwni'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | login -u nizarf -p bellehilatpiratiwni'
                 }
         }
         stage("Push to DockerHub") {
