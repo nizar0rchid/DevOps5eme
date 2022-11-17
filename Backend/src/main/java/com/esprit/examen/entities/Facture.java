@@ -22,8 +22,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Facture implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Facture implements Serializable {   
+   private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
