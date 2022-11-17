@@ -34,17 +34,17 @@ pipeline{
             
         }
         
-        //stage("Build & Tests") {
-        //    steps {
-           //     sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
-            //}
-            //post {
-                //success {
-                    //junit 'target/surefire-reports/**/*.xml' 
-                //}
-            //}
+        stage("Build & Tests") {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
                     
-        //}
+        }
 
         stage('Sonarqube Analysis') {
           steps {
@@ -57,7 +57,25 @@ pipeline{
             sh 'mvn deploy -Dmaven.test.skip=true -e'
           }
         }
-        stage('Docker') {
+        stage("Building Docker Image") {
+                steps{
+                    sh 'docker build -t derbel99/achat .'
+                }
+        }
+        
+
+           stage("Login to DockerHub") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u derbel99 -p Sonia@2005'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{
+                    sh 'docker push derbel99/achat'
+                }
+        }
+            stage('Docker compose') {
             
             steps {
                 
@@ -65,18 +83,7 @@ pipeline{
                 
             }
         }
-           stage("Login to DockerHub") {
-                steps{
-                   // sh 'sudo chmod 666 /var/run/docker.sock'
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u Derbel99 -p Sonia@2005'
-                }
-        }
-        stage("Push to DockerHub") {
-                steps{
-                    sh 'docker push projetdevops_app_1'
-                }
-        }
-    
+
 
       
 
