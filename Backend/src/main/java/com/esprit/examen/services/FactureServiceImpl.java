@@ -60,6 +60,7 @@ public class FactureServiceImpl implements IFactureService {
 		for (DetailFacture detail : detailsFacture) {
 			//Récuperer le produit 
 			Produit produit = produitRepository.findById(detail.getProduit().getIdProduit()).orElse(null);
+			if(produit != null) {
 			//Calculer le montant total pour chaque détail Facture
 			float prixTotalDetail = detail.getQteCommandee() * produit.getPrix();
 			//Calculer le montant remise pour chaque détail Facture
@@ -73,6 +74,7 @@ public class FactureServiceImpl implements IFactureService {
 			montantRemise = montantRemise + montantRemiseDetail;
 			detailFactureRepository.save(detail);
 		}
+			}
 		f.setMontantFacture(montantFacture);
 		f.setMontantRemise(montantRemise);
 		return f;
