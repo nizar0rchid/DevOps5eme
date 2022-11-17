@@ -72,13 +72,13 @@ pipeline {
         stage("Login to DockerHub") {
                 steps{
                    // sh 'sudo chmod 666 /var/run/docker.sock'
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u nizarf -p bellehilatpiratiwni'
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker -u nizar --bellehilatpiratiwni'
                 }
         }
         stage("Push to DockerHub") {
                 steps{
-                    sh 'docker push projetdevops_app_1'
-                    sh 'docker push devops_mysqldb_1'
+                    sh 'docker push nizarf/projetdevops_app_1:projetdevops_app_1'
+                    sh 'docker push nizarf/devops_mysqldb_1:devops_mysqldb_1'
                 }
         }
         
