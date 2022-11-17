@@ -73,7 +73,7 @@ pipeline{
         }
         stage("Push to DockerHub") {
                 steps{
-                    sh 'docker push samitfifhaprojetdevops_app_1'
+                    sh 'docker push docker.io/samitfifha/projetdevops_app_1'
                 }
         }
     
