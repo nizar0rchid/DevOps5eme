@@ -77,7 +77,7 @@ pipeline {
         }
         stage("Push to DockerHub") {
                 steps{
-                    sh 'docker push nizarf/projetdevops_app_1:projetdevops_app_1'
+                    sh 'docker push nizarf/devops_app_1:devops_app_1'
                     sh 'docker push nizarf/devops_mysqldb_1:devops_mysqldb_1'
                 }
         }
